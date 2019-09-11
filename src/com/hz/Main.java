@@ -1,5 +1,7 @@
 package com.hz;
 
+import java.awt.geom.NoninvertibleTransformException;
+
 public class Main {
 
     public static void main(String[] args) {
@@ -11,9 +13,16 @@ public class Main {
         // ask questions
         String q1 = "Do you often go (out) with friends?";
 
-        System.out.println(q1);
-        Boolean ans1 = reader.readLine();
-        model.setSocialActive(ans1);
+
+        try{
+            System.out.println(q1);
+            Boolean ans1 = reader.readLine();
+            model.setSocialActive(ans1);
+        } catch (NoninvertibleTransformException ex){
+            model.setSocialActive(false);
+        }
+
+
 
         int score = model.calculateHealthScore();
 

@@ -61,9 +61,9 @@ public class BooleanAdapter {
     /**
      * Wrapper method
      */
-    public Boolean readLine() {
+    public Boolean readLine() throws NoninvertibleTransformException {
         String ans = _reader.readLine();
 
-        return true;
+        return convertTo(ans);
     }
 }
