@@ -6,22 +6,14 @@ public class Main {
 
         // start survey
         HealthModel model = new HealthModel();
-        ConsoleReader reader = new ConsoleReader();
+        BooleanAdapter reader = new BooleanAdapter();
 
         // ask questions
         String q1 = "Do you often go (out) with friends?";
 
         System.out.println(q1);
-
-        String ans1 = reader.readLine();
-
-        // todo: make this work!!!
-        // 'no', 'i don't think so' must be read as false
-        // 'yes', 'of course' etc must be read as true
-
-        if(ans1 == true) {
-            model.setSocialActive(true);
-        }
+        Boolean ans1 = reader.readLine();
+        model.setSocialActive(ans1);
 
         int score = model.calculateHealthScore();
 
