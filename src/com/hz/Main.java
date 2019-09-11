@@ -1,6 +1,7 @@
 package com.hz;
 
 import java.awt.geom.NoninvertibleTransformException;
+import java.io.IOException;
 
 public class Main {
 
@@ -8,7 +9,9 @@ public class Main {
 
         // start survey
         HealthModel model = new HealthModel();
-        BooleanAdapter reader = new BooleanAdapter();
+
+        LineReader lowlevelReader = LineReaderFactory.GetFileReader();
+        BooleanAdapter reader = new BooleanAdapter(lowlevelReader);
 
         // ask questions
         String q1 = "Do you often go (out) with friends?";
@@ -20,6 +23,11 @@ public class Main {
             model.setSocialActive(ans1);
         } catch (NoninvertibleTransformException ex){
             model.setSocialActive(false);
+            // set model invalid
+        }
+        catch (IOException ioex) {
+            model.setSocialActive(false);
+            // set model invalid
         }
 
 

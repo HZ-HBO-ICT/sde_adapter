@@ -1,16 +1,17 @@
 package com.hz;
 
 import java.awt.geom.NoninvertibleTransformException;
+import java.io.IOException;
 
 public class BooleanAdapter {
 
-    private ConsoleReader _reader;
+    private LineReader _reader;
 
     private String[] _confirmingKeywords;
     private String[] _denyingKeywords;
 
-    public BooleanAdapter() {
-        _reader = new ConsoleReader();
+    public BooleanAdapter(LineReader reader) {
+        _reader = reader;
 
         _confirmingKeywords = this.getConfirmingKeywords();
         _denyingKeywords = new String[] {"no", "don't think so", "say what", "not" };
@@ -43,7 +44,7 @@ public class BooleanAdapter {
     private boolean isConfirming(String phrase) {
 
         for(String keyword : _confirmingKeywords){
-            if(phrase.contains(keyword))
+            if(phrase.toLowerCase().contains(keyword))
                 return true;
         }
         return false;
@@ -52,7 +53,7 @@ public class BooleanAdapter {
     private boolean isDenying(String phrase) {
 
         for(String keyword : _denyingKeywords){
-            if(phrase.contains(keyword))
+            if(phrase.toLowerCase().contains(keyword))
                 return true;
         }
         return false;
@@ -61,7 +62,8 @@ public class BooleanAdapter {
     /**
      * Wrapper method
      */
-    public Boolean readLine() throws NoninvertibleTransformException {
+    public Boolean readLine()
+            throws NoninvertibleTransformException, IOException {
         String ans = _reader.readLine();
 
         return convertTo(ans);

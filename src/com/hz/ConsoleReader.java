@@ -4,7 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class ConsoleReader {
+public class ConsoleReader extends LineReader {
     public String readLine() {
         try{
             String line = (new BufferedReader(
